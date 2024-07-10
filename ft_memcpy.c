@@ -6,17 +6,17 @@
 /*   By: yuotsuka <yuotsuka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:03:04 by yuotsuka          #+#    #+#             */
-/*   Updated: 2024/05/24 18:35:53 by yuotsuka         ###   ########.fr       */
+/*   Updated: 2024/06/29 18:14:36 by yuotsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-#define AL_CH 0x1f // 1111
-
-void	copy_aligned(const unsigned char *src, unsigned char *dst, size_t n)
+static void	copy_aligned32(void *src, void *dst, size_t n)
 {
-	__asm__	__volatile__(
+	if (1)
+	{
+		asm (
 			"1:\n\t"
 			"vmovdqa (%[src]), %%ymm0 \n\t"
 			"vmovdqa %%ymm0, (%[dst]) \n\t"
@@ -28,29 +28,33 @@ void	copy_aligned(const unsigned char *src, unsigned char *dst, size_t n)
 			:
 			: "memory", "ymm0"
 			);
+	}
 }
 
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
-	const unsigned char *(x) = (const unsigned char *) src;
-	unsigned char *(y) = (unsigned char *) dst;
-	size_t (xalign) = ((size_t)x) & AL_CH, yalign = ((size_t)y) & AL_CH;
-	while ((xalign && n) || (yalign && n))
+	const unsigned char *(src_ptr) = (const unsigned char *) src;
+	unsigned char *(dst_ptr) = (unsigned char *) dst;
+	unsigned long (src_al) = ((size_t)src_ptr) & 0x1f;
+	unsigned long (dst_al) = ((size_t)dst_ptr) & 0x1f;
+	if (!dst && !src)
+		return (NULL);
+	while ((src_al && n) || (dst_al && n))
 	{
-		*y++ = *x++;
-		xalign = ((short int)x) & AL_CH;
-		yalign = ((short int)y) & AL_CH;
+		*dst_ptr++ = *src_ptr++;
+		src_al = ((short int)src_ptr) & 0x1f;
+		dst_al = ((short int)dst_ptr) & 0x1f;
 		--n;
 	}
 	if (n >= 32)
 	{
-		size_t (aligned_blocks) = n & ~(size_t)AL_CH;
-		copy_aligned(x, y, aligned_blocks);
-		x += aligned_blocks;
-		y += aligned_blocks;
+		size_t (aligned_blocks) = n & ~(size_t)0x1f;
+		copy_aligned32(src_ptr, dst_ptr, aligned_blocks);
+		src_ptr += aligned_blocks;
+		dst_ptr += aligned_blocks;
 		n -= aligned_blocks;
 	}
 	while (n--)
-		*y++ = *x++;
+		*dst_ptr++ = *src_ptr++;
 	return (dst);
 }

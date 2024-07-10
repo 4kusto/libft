@@ -10,8 +10,8 @@ OBJS = $(SRCS:.c=.o)
 #ifdef WITH_BONUS
 OBJS += $(BONUS_SRCS:.c=.o)
 #sendif
-CC = clang-11
-CFLAGS = -Wall -Wextra 
+CC = clang
+CFLAGS = -Wall -Wextra
 AR = ar
 ARFLAGS = rsc
 
