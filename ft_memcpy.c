@@ -14,7 +14,6 @@
 
 static void	copy_aligned32(void *src, void *dst, size_t n)
 {
-	if (1)
 	{
 		asm (
 			"1:\n\t"
@@ -42,8 +41,8 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	while ((src_al && n) || (dst_al && n))
 	{
 		*dst_ptr++ = *src_ptr++;
-		src_al = ((short int)src_ptr) & 0x1f;
-		dst_al = ((short int)dst_ptr) & 0x1f;
+		src_al = (short int)src_ptr & 0x1f;
+		dst_al = (short int)dst_ptr & 0x1f;
 		--n;
 	}
 	if (n >= 32)

@@ -15,7 +15,6 @@
 
 void	ft_set(unsigned char *dst, uint64_t c64, size_t n64)
 {
-	if (1)
 	{
 		__asm__(
 			"rep stosq\n"
