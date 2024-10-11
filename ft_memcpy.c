@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-static void	copy_aligned32(void *src, void *dst, size_t n)
+static void	copy_aligned32(const unsigned char *src, unsigned char *dst, size_t n)
 {
 	if (1)
 	{
@@ -34,16 +34,16 @@ static void	copy_aligned32(void *src, void *dst, size_t n)
 void	*ft_memcpy(void *dst, const void *src, size_t n)
 {
 	const unsigned char *(src_ptr) = (const unsigned char *) src;
-	unsigned char *(dst_ptr) = (unsigned char *) dst;
-	unsigned long (src_al) = ((size_t)src_ptr) & 0x1f;
-	unsigned long (dst_al) = ((size_t)dst_ptr) & 0x1f;
+	unsigned char *(dst_ptr) = (unsigned char *)dst;
+	size_t (src_al) = ((size_t)src_ptr) & 0x1f;
+	size_t (dst_al) = ((size_t)dst_ptr) & 0x1f;
 	if (!dst && !src)
 		return (NULL);
 	while ((src_al && n) || (dst_al && n))
 	{
 		*dst_ptr++ = *src_ptr++;
-		src_al = ((short int)src_ptr) & 0x1f;
-		dst_al = ((short int)dst_ptr) & 0x1f;
+		src_al = (size_t)src_ptr & 0x1f;
+		dst_al = (size_t)dst_ptr & 0x1f;
 		--n;
 	}
 	if (n >= 32)

@@ -11,7 +11,7 @@ OBJS = $(SRCS:.c=.o)
 OBJS += $(BONUS_SRCS:.c=.o)
 #sendif
 CC = clang
-CFLAGS = -Wall -Wextra
+CFLAGS = -Wall -Wextra -Werror
 AR = ar
 ARFLAGS = rsc
 
@@ -43,4 +43,4 @@ lldb:	all
 
 so:
 	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRCS)
-	clang-11 -nostartfiles -shared -o libft.so $(OBJS)
+	$(CC) -nostartfiles -shared -o libft.so $(OBJS)
