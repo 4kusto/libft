@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsuka <yuotsuka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 21:05:11 by yuotsuka          #+#    #+#             */
-/*   Updated: 2024/11/06 16:54:09 by yuotsuka         ###   ########.fr       */
+/*   Created: 2024/11/17 18:54:40 by yuotsuka          #+#    #+#             */
+/*   Updated: 2024/11/17 18:57:07 by yuotsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isupper(int c)
 {
-	const char	*p;
-
-	p = s;
-	while (*p)
-		++p;
-	return (p - s);
+	if (c >= 'a' && c <= 'z')
+		return (1);
+    else
+    	return (c);
 }

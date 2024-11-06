@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsuka <yuotsuka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 21:05:11 by yuotsuka          #+#    #+#             */
-/*   Updated: 2024/11/06 16:54:09 by yuotsuka         ###   ########.fr       */
+/*   Created: 2024/11/06 16:09:04 by yuotsuka          #+#    #+#             */
+/*   Updated: 2024/11/06 16:41:46 by yuotsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+int	ft_isspace(int c)
 {
-	const char	*p;
+	const char	*str;
+	int			i;
 
-	p = s;
-	while (*p)
-		++p;
-	return (p - s);
+	i = 0;
+	str = " \n\t\v\f\r";
+	while (c != str[i])
+	{
+		if (str[i] == '\0')
+			return (0);
+		i++;
+	}
+	return (1);
 }

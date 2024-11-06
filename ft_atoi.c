@@ -6,40 +6,21 @@
 /*   By: yuotsuka <yuotsuka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 20:59:19 by yuotsuka          #+#    #+#             */
-/*   Updated: 2024/05/22 20:21:14 by yuotsuka         ###   ########.fr       */
+/*   Updated: 2024/11/17 21:09:22 by yuotsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_isspace(int c)
-{
-	const char	*str;
-	int			i;
-
-	i = 0;
-	str = " \n\t\v\f\r";
-	while (c != str[i])
-	{
-		if (str[i] == '\0')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
 static long	ft_atol(const char *s)
 {
-	long	res;
-	long	coeff;
-
-	res = 0;
-	coeff = -1ul >> 1;
+	long (res) = 0;
+	long (coeff) = LONG_MIN;
 	while (*s && ft_isspace(*s))
 		s++;
 	if (*s == '+' || *s == '-')
 		if (*s++ == '-')
-			coeff = ~(-1ul >> 1);
+			coeff = ~(LONG_MIN);
 	while (*s && ft_isdigit(*s))
 	{
 		if (__builtin_mul_overflow(res, 10, &res)

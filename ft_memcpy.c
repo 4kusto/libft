@@ -6,18 +6,16 @@
 /*   By: yuotsuka <yuotsuka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 21:03:04 by yuotsuka          #+#    #+#             */
-/*   Updated: 2024/06/29 18:14:36 by yuotsuka         ###   ########.fr       */
+/*   Updated: 2024/11/06 16:53:11 by yuotsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static void	copy_aligned32(const unsigned char *src, unsigned char *dst, size_t n)
+static void	copy_aligned32(const void *src, void *dst, size_t n)
 {
-	if (1)
 	{
-		asm (
-			"1:\n\t"
+		asm ("1:\n\t"
 			"vmovdqa (%[src]), %%ymm0 \n\t"
 			"vmovdqa %%ymm0, (%[dst]) \n\t"
 			"addq $32, %[src] \n\t"
@@ -26,8 +24,7 @@ static void	copy_aligned32(const unsigned char *src, unsigned char *dst, size_t 
 			"jnz 1b \n\t"
 			: [src] "+r" (src), [dst] "+r" (dst), [n] "+r" (n)
 			:
-			: "memory", "ymm0"
-			);
+			: "memory", "ymm0");
 	}
 }
 

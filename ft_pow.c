@@ -1,23 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_pow.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuotsuka <yuotsuka@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/18 21:05:11 by yuotsuka          #+#    #+#             */
-/*   Updated: 2024/11/06 16:54:09 by yuotsuka         ###   ########.fr       */
+/*   Created: 2024/11/06 16:09:21 by yuotsuka          #+#    #+#             */
+/*   Updated: 2024/11/06 16:09:24 by yuotsuka         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+long double	ft_pow(long double n, unsigned int pow)
 {
-	const char	*p;
-
-	p = s;
-	while (*p)
-		++p;
-	return (p - s);
+	if (pow == 0)
+		return (1);
+	return (n * ft_pow(n, pow - 1));
 }
