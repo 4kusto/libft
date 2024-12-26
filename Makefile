@@ -9,7 +9,7 @@ ft_lstdelone.c ft_lstclear.c ft_lstiter.c ft_lstmap.c
 OBJS = $(SRCS:.c=.o)
 #ifdef WITH_BONUS
 OBJS += $(BONUS_SRCS:.c=.o)
-#sendif
+#endif
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
 AR = ar
